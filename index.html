@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卧推提升计划 | 70kg → 90kg</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface2: #222;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --text2: #999;
+    --accent: #ff4757;
+    --accent2: #ff6b81;
+    --gold: #f0a500;
+    --green: #2ed573;
+    --blue: #1e90ff;
+    --purple: #a855f7;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(0,0,0,.4);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Nav ───────────────────── */
+  nav {
+    position: sticky; top:0; z-index:100;
+    background: rgba(15,15,15,.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+  }
+  nav .inner {
+    max-width: 1100px; margin:0 auto;
+    display:flex; gap:0; align-items:center;
+    overflow-x:auto; scrollbar-width:none;
+  }
+  nav .inner::-webkit-scrollbar { display:none; }
+  nav a {
+    color:var(--text2); text-decoration:none; font-size:.85rem;
+    padding:14px 16px; white-space:nowrap; border-bottom:2px solid transparent;
+    transition: all .2s;
+  }
+  nav a:hover, nav a.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  nav .brand { font-weight:700; font-size:1rem; color:var(--text); margin-right:auto; }
+
+  /* ── Layout ────────────────── */
+  .container { max-width:1100px; margin:0 auto; padding: 20px 20px 60px; }
+
+  /* ── Hero ──────────────────── */
+  .hero {
+    text-align:center; padding: 50px 20px 40px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: var(--radius);
+    margin: 24px auto;
+    position:relative; overflow:hidden;
+  }
+  .hero::after {
+    content:''; position:absolute; inset:0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='20' cy='30' r='15' fill='white' opacity='.02'/%3E%3Ccircle cx='75' cy='60' r='25' fill='white' opacity='.02'/%3E%3Ccircle cx='50' cy='80' r='20' fill='white' opacity='.02'/%3E%3C/svg%3E");
+  }
+  .hero h1 { font-size:clamp(2rem, 5vw, 3rem); font-weight:900; position:relative; z-index:1; }
+  .hero h1 span { color:var(--accent2); }
+  .hero .subtitle { color:var(--text2); margin-top:8px; font-size:1.1rem; position:relative; z-index:1; }
+
+  /* ── Stat cards ────────────── */
+  .stat-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:14px; margin: -20px auto 30px; position:relative; z-index:2;
+    max-width:900px; padding:0 20px;
+  }
+  .stat-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); padding:18px 16px; text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .stat-card .num { font-size:1.8rem; font-weight:800; color:var(--accent2); }
+  .stat-card .label { font-size:.8rem; color:var(--text2); margin-top:4px; }
+
+  /* ── Section ───────────────── */
+  section { margin:40px 0; }
+  .section-title {
+    font-size:1.5rem; font-weight:800; margin-bottom:20px;
+    padding-left:16px; border-left:4px solid var(--accent);
+  }
+  .section-title .icon { margin-right:8px; }
+
+  /* ── Tables ────────────────── */
+  .table-wrap { overflow-x:auto; border-radius:var(--radius); border:1px solid var(--border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th {
+    background:var(--surface2); color:var(--accent2);
+    font-weight:700; font-size:.85rem; padding:12px 14px; text-align:left;
+  }
+  td { padding:11px 14px; border-top:1px solid var(--border); font-size:.9rem; }
+  tr:hover td { background:rgba(255,255,255,.02); }
+  .highlight-row td { background:rgba(255,71,87,.08); font-weight:600; }
+
+  /* ── Cards ─────────────────── */
+  .card-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:18px;
+  }
+  .card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; box-shadow:var(--shadow);
+  }
+  .card h3 { font-size:1.1rem; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .card h3 .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .dot.red { background:var(--accent); }
+  .dot.blue { background:var(--blue); }
+  .dot.green { background:var(--green); }
+  .dot.gold { background:var(--gold); }
+
+  .card ul { list-style:none; }
+  .card li { padding:6px 0; font-size:.9rem; border-bottom:1px solid rgba(255,255,255,.04); }
+  .card li:last-child { border:none; }
+  .card li strong { color:var(--accent2); }
+
+  /* ── Phase timeline ────────── */
+  .phase-bar {
+    display:flex; gap:4px; margin:16px 0;
+    flex-wrap:wrap;
+  }
+  .phase-week {
+    flex:1; min-width:80px; padding:14px 10px; text-align:center;
+    border-radius:8px; background:var(--surface2);
+    border:1px solid var(--border);
+    font-size:.8rem;
+  }
+  .phase-week.active { border-color:var(--accent); background:rgba(255,71,87,.1); }
+  .phase-week.deload { border-color:var(--gold); background:rgba(240,165,0,.1); }
+  .phase-week.test { border-color:var(--green); background:rgba(46,213,115,.1); }
+  .phase-week .w-num { font-size:1.3rem; font-weight:800; display:block; }
+  .phase-week .w-label { color:var(--text2); display:block; margin-top:2px; }
+
+  /* ── Technique ─────────────── */
+  .tech-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; }
+  .tech-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); padding:22px;
+  }
+  .tech-card h4 { margin-bottom:8px; color:var(--accent2); }
+  .tech-card p { font-size:.88rem; color:var(--text2); }
+
+  /* ── Diet ──────────────────── */
+  .diet-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px;
+  }
+  .diet-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+  .diet-item:last-child { border:none; }
+  .diet-icon { font-size:2rem; min-width:48px; text-align:center; }
+  .diet-info { flex:1; }
+  .diet-info strong { display:block; }
+  .diet-info span { font-size:.82rem; color:var(--text2); }
+  .diet-grams { font-weight:700; color:var(--accent2); text-align:right; min-width:60px; }
+
+  /* ── Timer ─────────────────── */
+  .timer-box {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; text-align:center; margin:20px 0;
+  }
+  .timer-display { font-size:5rem; font-weight:900; font-variant-numeric:tabular-nums; }
+  .timer-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+  .timer-btns button {
+    padding:10px 20px; border-radius:8px; border:1px solid var(--border);
+    background:var(--surface2); color:var(--text); cursor:pointer;
+    font-size:.9rem; transition:all .2s;
+  }
+  .timer-btns button:hover { border-color:var(--accent); }
+  .timer-btns button.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+  /* ── 1RM Calculator ────────── */
+  .calc-box {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin:20px 0;
+  }
+  .calc-row { display:flex; gap:12px; align-items:end; flex-wrap:wrap; }
+  .calc-field { flex:1; min-width:140px; }
+  .calc-field label { display:block; font-size:.82rem; color:var(--text2); margin-bottom:4px; }
+  .calc-field input {
+    width:100%; padding:10px 14px; border-radius:8px;
+    border:1px solid var(--border); background:var(--surface2);
+    color:var(--text); font-size:1rem;
+  }
+  .calc-field input:focus { outline:none; border-color:var(--accent); }
+  .calc-result { font-size:1.4rem; font-weight:800; color:var(--green); margin-top:16px; }
+
+  /* ── Footer ────────────────── */
+  footer { text-align:center; padding:30px; color:var(--text2); font-size:.82rem; border-top:1px solid var(--border); }
+
+  /* ── Responsive ────────────── */
+  @media (max-width:600px) {
+    .hero { padding:30px 16px 24px; }
+    .stat-grid { grid-template-columns:repeat(2, 1fr); }
+    .timer-display { font-size:3.5rem; }
+    nav a { font-size:.75rem; padding:10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="inner">
+    <a href="#" class="brand">🏋️ 卧推计划</a>
+    <a href="#stats">数据</a>
+    <a href="#plan">计划</a>
+    <a href="#phase">周期</a>
+    <a href="#tech">技术</a>
+    <a href="#diet">饮食</a>
+    <a href="#tools">工具</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <h1>卧推 <span>70kg → 90kg</span></h1>
+  <p class="subtitle">基于 5×5 线性周期 + 容量日双轨制 · 一周两练</p>
+</div>
+
+<!-- ═══ STATS ═══ -->
+<div class="stat-grid" id="stats">
+  <div class="stat-card"><div class="num">70kg</div><div class="label">当前极限 1RM</div></div>
+  <div class="stat-card"><div class="num">60kg×10</div><div class="label">做组能力</div></div>
+  <div class="stat-card"><div class="num">59-60kg</div><div class="label">体重</div></div>
+  <div class="stat-card"><div class="num">1.17×</div><div class="label">体重倍率</div></div>
+  <div class="stat-card"><div class="num">90kg</div><div class="label">半年目标 🎯</div></div>
+</div>
+
+<!-- ═══ 每周安排 ═══ -->
+<section id="plan">
+  <h2 class="section-title"><span class="icon">📅</span>每周训练安排</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>周几</th><th>类型</th><th>核心目标</th><th>间隔要求</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row"><td>周一</td><td>🔴 重训日（力量）</td><td>大重量低次数 · 神经适应</td><td>—</td></tr>
+        <tr><td>周二 ~ 周三</td><td colspan="3" style="color:var(--text2);text-align:center;">休息 / 背腿训练</td></tr>
+        <tr class="highlight-row"><td>周四</td><td>🔵 容量日（增肌）</td><td>中等重量高次数 · 肌肉肥大</td><td>距上次 ≥72h</td></tr>
+        <tr><td>周五 ~ 周日</td><td colspan="3" style="color:var(--text2);text-align:center;">休息 / 背腿训练</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ 重训日 ═══ -->
+<section>
+  <h2 class="section-title"><span class="icon">🔴</span>第一天 · 重训日（力量日）</h2>
+  <p style="color:var(--text2);margin-bottom:16px;">用 75%-90% 1RM 的重量做低次数，训练神经系统募集更多肌纤维。组间休息 <strong>2.5-3 分钟</strong>。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>动作</th><th>组数×次数</th><th>重量</th><th>要点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>🏋️ <strong>杠铃平板卧推</strong></td><td>5×5</td><td>55-57.5kg</td><td>主力动作，控制离心 2-3 秒</td></tr>
+        <tr><td>2</td><td>⏸️ <strong>暂停卧推</strong></td><td>3×3</td><td>50-55kg</td><td>触胸停顿 2 秒再推，消除牵张反射</td></tr>
+        <tr><td>3</td><td>🤛 <strong>窄距卧推</strong></td><td>3×6-8</td><td>40-45kg</td><td>握距肩宽，强化三头肌锁定</td></tr>
+        <tr><td>4</td><td>📐 <strong>上斜哑铃卧推</strong></td><td>3×8</td><td>单边 16-18kg</td><td>30° 角，幅度比杠铃更大</td></tr>
+        <tr><td>5</td><td>💪 <strong>双杠臂屈伸</strong></td><td>3×8-10</td><td>自重 / 负重</td><td>身体前倾，侧重下胸</td></tr>
+        <tr><td>6</td><td>🔗 <strong>三头绳索下压</strong></td><td>3×12-15</td><td>适中</td><td>顶峰收缩，锁定阶段辅助</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:12px;font-size:.85rem;color:var(--gold);">
+    💡 渐进规则：每周在 5×5 杠铃卧推上加 <strong>2.5kg</strong>。完不成则保持同重量重试，连败两次就减载 10%。
+  </p>
+</section>
+
+<!-- ═══ 容量日 ═══ -->
+<section>
+  <h2 class="section-title"><span class="icon">🔵</span>第二天 · 容量日（增肌日）</h2>
+  <p style="color:var(--text2);margin-bottom:16px;">用 65%-75% 1RM 做更高次数，累积训练量刺激肌肉生长。组间休息 <strong>90秒-2分钟</strong>。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>动作</th><th>组数×次数</th><th>重量</th><th>要点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>🏋️ <strong>杠铃平板卧推</strong></td><td>4×8-10</td><td>50-52.5kg</td><td>离心 3 秒慢放，控制节奏</td></tr>
+        <tr><td>2</td><td>📐 <strong>上斜杠铃卧推</strong></td><td>4×8-10</td><td>40-45kg</td><td>30° 角，过陡变练肩</td></tr>
+        <tr><td>3</td><td>🏐 <strong>哑铃平板卧推</strong></td><td>3×10-12</td><td>单边 16-18kg</td><td>更大运动幅度，底部拉伸感</td></tr>
+        <tr><td>4</td><td>🕊️ <strong>绳索飞鸟</strong></td><td>3×12-15</td><td>适中</td><td>顶峰收缩 1 秒，孤立胸肌</td></tr>
+        <tr><td>5</td><td>🛑 <strong>地板卧推</strong></td><td>3×8</td><td>50-55kg</td><td>半程卧推，强化锁定阶段</td></tr>
+        <tr><td>6</td><td>🔙 <strong>面拉</strong></td><td>3×15</td><td>轻重量</td><td>后肩 + 肩袖肌群，保护肩关节</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ 5周周期 ═══ -->
+<section id="phase">
+  <h2 class="section-title"><span class="icon">📈</span>5 周渐进周期</h2>
+  <div class="phase-bar">
+    <div class="phase-week active">
+      <span class="w-num">W1</span><span class="w-label">适应期</span>
+      <span style="font-size:.7rem;color:var(--text2);">重训 5×5@55<br>容量 4×8@50</span>
+    </div>
+    <div class="phase-week active">
+      <span class="w-num">W2</span><span class="w-label">加重量</span>
+      <span style="font-size:.7rem;color:var(--text2);">重训 5×5@57.5<br>容量 4×8@52.5</span>
+    </div>
+    <div class="phase-week active">
+      <span class="w-num">W3</span><span class="w-label">挑战周 🔥</span>
+      <span style="font-size:.7rem;color:var(--text2);">重训 5×5@60<br>容量 4×8@52.5</span>
+    </div>
+    <div class="phase-week deload">
+      <span class="w-num">W4</span><span class="w-label">减载周 🧘</span>
+      <span style="font-size:.7rem;color:var(--text2);">重训 3×5@50<br>容量 3×8@45</span>
+    </div>
+    <div class="phase-week test">
+      <span class="w-num">W5</span><span class="w-label">冲刺 + 测试 🎯</span>
+      <span style="font-size:.7rem;color:var(--text2);">重训 5×5@57.5<br>周末测新极限!</span>
+    </div>
+  </div>
+  <p style="font-size:.85rem;color:var(--text2);margin-top:10px;">
+    📐 每 4 周一循环，第 4 周主动减载让身体恢复，第 5 周从略低于上周的重量启动新冲刺。
+  </p>
+</section>
+
+<!-- ═══ 技术要点 ═══ -->
+<section id="tech">
+  <h2 class="section-title"><span class="icon">🎯</span>技术要点 — 比加重量更重要</h2>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <h4>1. 起桥 + Leg Drive</h4>
+      <p>脚踩实地面 → 收紧臀部 → 胸椎微微起桥。推的时候想象把自己"推进凳子里"。<strong>不是腰过度反弓</strong>，是上背收紧、胸挺起来。</p>
+    </div>
+    <div class="tech-card">
+      <h4>2. 握距</h4>
+      <p>约肩宽的 1.5 倍。杠铃触胸时<strong>前臂应垂直于地面</strong>。太宽伤肩，太窄变练三头。</p>
+    </div>
+    <div class="tech-card">
+      <h4>3. 杠铃轨迹</h4>
+      <p><strong>不是直上直下！</strong>从乳头位置触胸 → 推到肩膀正上方，轨迹是一条向头方向的斜线。</p>
+    </div>
+    <div class="tech-card">
+      <h4>4. 离心控制</h4>
+      <p>下放时心中默数 2-3 秒，<strong>不要自由落体</strong>。触胸轻触即推，不要砸胸弹起借力。</p>
+    </div>
+    <div class="tech-card">
+      <h4>5. 呼吸配合</h4>
+      <p>下放前<strong>深吸一口气</strong>憋住（瓦式呼吸），推过粘滞点再吐气。每一下都重新吸气。</p>
+    </div>
+    <div class="tech-card">
+      <h4>6. 肩胛骨收紧</h4>
+      <p>躺下后先把<strong>肩胛骨往后下方夹紧</strong>，像夹一支笔在背中间。整个卧推过程保持住。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 饮食 ═══ -->
+<section id="diet">
+  <h2 class="section-title"><span class="icon">🍗</span>学校饮食方案（鸡腿 + 鸡蛋 + 蛋白粉）</h2>
+  <p style="color:var(--text2);margin-bottom:16px;">以你学校能吃到的食材为核心，设计每日蛋白质摄入方案。</p>
+
+  <div class="card-grid">
+    <!-- 每日目标 -->
+    <div class="card">
+      <h3><span class="dot gold"></span>每日营养目标</h3>
+      <ul>
+        <li>🔥 热量盈余 <strong>200-300 大卡</strong></li>
+        <li>🥩 蛋白质 <strong>≥120g</strong>（2g/kg 体重）</li>
+        <li>🍚 碳水 <strong>足够支撑训练</strong></li>
+        <li>😴 睡眠 <strong>7-8 小时</strong></li>
+      </ul>
+    </div>
+
+    <!-- 蛋白质来源 -->
+    <div class="card">
+      <h3><span class="dot red"></span>三大蛋白质来源</h3>
+      <div class="diet-item">
+        <div class="diet-icon">🍗</div>
+        <div class="diet-info"><strong>鸡腿</strong><span>每 100g（可食部分）≈ 20g 蛋白质</span></div>
+        <div class="diet-grams">× 2-3 个/天</div>
+      </div>
+      <div class="diet-item">
+        <div class="diet-icon">🥚</div>
+        <div class="diet-info"><strong>鸡蛋</strong><span>每个 ≈ 6-7g 蛋白质，蛋黄也吃</span></div>
+        <div class="diet-grams">× 4-6 个/天</div>
+      </div>
+      <div class="diet-item">
+        <div class="diet-icon">🥤</div>
+        <div class="diet-info"><strong>蛋白粉</strong><span>每勺 ≈ 25g 蛋白质（乳清蛋白）</span></div>
+        <div class="diet-grams">× 1-2 勺/天</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 一日模板 -->
+  <div class="table-wrap" style="margin-top:18px;">
+    <table>
+      <thead>
+        <tr><th>时间</th><th>餐</th><th>内容</th><th>蛋白质</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>早餐 7:30</td><td>🥚 鸡蛋餐</td><td>3 个水煮蛋 + 馒头/包子/粥 + 豆浆或牛奶</td><td>~20g</td></tr>
+        <tr><td>午餐 12:00</td><td>🍗 正餐</td><td>食堂饭菜 + 2 个鸡腿（去皮更好但不去也行）</td><td>~35g</td></tr>
+        <tr><td>练前 16:00</td><td>🍌 加餐</td><td>1 根香蕉/面包 + 1 勺蛋白粉（水或牛奶冲）</td><td>~25g</td></tr>
+        <tr class="highlight-row"><td>训练 17:00</td><td>🏋️ 训练</td><td>训练中喝 BCAA 或白水即可</td><td>—</td></tr>
+        <tr><td>练后 18:30</td><td>🥤 补充</td><td>1 勺蛋白粉 + 食堂晚餐 + 1 个鸡腿 + 米饭</td><td>~40g</td></tr>
+        <tr><td>睡前 22:00</td><td>🥚 加餐</td><td>2 个水煮蛋 或 半勺蛋白粉 + 牛奶</td><td>~14g</td></tr>
+      </tbody>
+      <tfoot>
+        <tr style="background:var(--surface2);">
+          <td colspan="3" style="text-align:right;font-weight:700;">全天蛋白质合计</td>
+          <td style="font-weight:800;color:var(--green);">~134g ✅</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div style="margin-top:16px;padding:16px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+    <strong>💡 实操建议：</strong>
+    <ul style="margin-top:8px;list-style-position:inside;color:var(--text2);font-size:.9rem;">
+      <li>鸡腿如果只有食堂的卤鸡腿/炸鸡腿，每顿拿 2 个，去皮更好</li>
+      <li>鸡蛋可以去食堂买煮好的，也可以自己用电煮锅在宿舍煮</li>
+      <li>蛋白粉买 <strong>乳清蛋白（Whey Protein）</strong>，不要买增肌粉（碳水太多）</li>
+      <li>练前 1-2 小时保证有碳水摄入，不然训练没力气</li>
+      <li>米饭/馒头敞开了吃，你现在 130 斤不需要怕碳水</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ 工具 ═══ -->
+<section id="tools">
+  <h2 class="section-title"><span class="icon">🧮</span>训练工具</h2>
+
+  <!-- 1RM 计算器 -->
+  <div class="calc-box">
+    <h3 style="margin-bottom:14px;">1RM 估算计算器</h3>
+    <p style="font-size:.82rem;color:var(--text2);margin-bottom:14px;">
+      输入你任意一组做到力竭的重量和次数，推算极限重量。公式：1RM = 重量 × (1 + 次数/30)
+    </p>
+    <div class="calc-row">
+      <div class="calc-field">
+        <label>重量 (kg)</label>
+        <input type="number" id="rm-weight" value="60" min="1" step="2.5">
+      </div>
+      <div class="calc-field">
+        <label>次数 (力竭)</label>
+        <input type="number" id="rm-reps" value="10" min="1" max="20">
+      </div>
+      <button onclick="calc1RM()" style="padding:10px 24px;border-radius:8px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1rem;">
+        计算
+      </button>
+    </div>
+    <div class="calc-result" id="rm-result">估算 1RM: 80.0 kg</div>
+  </div>
+
+  <!-- 组间休息计时器 -->
+  <div class="timer-box">
+    <h3 style="margin-bottom:8px;">⏱️ 组间休息计时器</h3>
+    <div class="timer-display" id="timer">3:00</div>
+    <div class="timer-btns">
+      <button onclick="setTimer(180)" class="primary">重训日 3:00</button>
+      <button onclick="setTimer(120)">容量日 2:00</button>
+      <button onclick="setTimer(90)">辅助动作 1:30</button>
+      <button onclick="setTimer(60)">热身 1:00</button>
+      <button onclick="stopTimer()">⏹️ 停止</button>
+    </div>
+    <audio id="alarm" preload="auto">
+      <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAf39/f4B/f3+AgH9/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f39/f39/f39/f39/f39/f39/f39/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af" type="audio/wav">
+    </audio>
+  </div>
+</section>
+
+<!-- ═══ 预期进度 ═══ -->
+<section id="progress">
+  <h2 class="section-title"><span class="icon">📊</span>预期进度参考</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>时间节点</th><th>预测卧推 1RM</th><th>阶段说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>现在</td><td>70 kg</td><td>基准线</td></tr>
+        <tr><td>4 周后</td><td>72.5 - 75 kg</td><td>神经适应期，技术优化</td></tr>
+        <tr><td>8 周后</td><td>77.5 - 80 kg</td><td>力量开始明显增长</td></tr>
+        <tr class="highlight-row"><td>12 周后</td><td>82.5 - 85 kg</td><td>配合体重增长突破</td></tr>
+        <tr><td>半年后</td><td>90 kg+ 🎉</td><td>前提：体重涨到 140+ 斤</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:14px;padding:14px 18px;background:rgba(240,165,0,.1);border:1px solid var(--gold);border-radius:8px;font-size:.9rem;">
+    ⚠️ <strong>关键前提：你的体重必须涨。</strong>130 斤推 70kg 已经是优秀的体重比了，不增肌很难继续突破。目标半年内慢慢涨到 140-145 斤。
+  </div>
+</section>
+
+</div>
+
+<footer>🏋️ 卧推提升计划 · 专门为你定制 · 坚持执行，90kg 见！</footer>
+
+<script>
+// ═══ 1RM Calculator ═══
+function calc1RM() {
+  const w = parseFloat(document.getElementById('rm-weight').value);
+  const r = parseInt(document.getElementById('rm-reps').value);
+  if (!w || !r || r < 1) return;
+  const rm = w * (1 + r / 30);
+  document.getElementById('rm-result').textContent = `估算 1RM: ${rm.toFixed(1)} kg`;
+}
+
+// ═══ Rest Timer ═══
+let timerInterval = null;
+let timerSeconds = 0;
+let timerRunning = false;
+
+function setTimer(sec) {
+  stopTimer();
+  timerSeconds = sec;
+  timerRunning = true;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    updateTimerDisplay();
+    if (timerSeconds <= 0) {
+      stopTimer();
+      document.getElementById('alarm').play().catch(()=>{});
+      document.getElementById('timer').style.color = 'var(--accent)';
+      setTimeout(() => {
+        document.getElementById('timer').style.color = '';
+      }, 2000);
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning = false;
+  timerSeconds = 0;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(Math.abs(timerSeconds) / 60);
+  const s = Math.abs(timerSeconds) % 60;
+  const sign = timerSeconds < 0 ? '+' : '';
+  document.getElementById('timer').textContent = `${sign}${m}:${String(s).padStart(2,'0')}`;
+}
+
+// ═══ Nav highlight ═══
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// ═══ Init calc ═══
+calc1RM();
+</script>
+
+</body>
+</html>
